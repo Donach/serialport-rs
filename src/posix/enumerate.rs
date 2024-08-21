@@ -573,7 +573,7 @@ cfg_if! {
             }
             Ok(vec)
         }
-    } else if #[cfg(all(target_os = "linux", not(target_env = "musl"), feature = "libudev"))] {
+    } else if #[cfg(all(target_os = "linux", feature = "libudev"))] {
         /// Scans the system for serial ports and returns a list of them.
         /// The `SerialPortInfo` struct contains the name of the port
         /// which can be used for opening it.
