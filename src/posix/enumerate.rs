@@ -620,7 +620,7 @@ cfg_if! {
             let mut s;
             for path in sys_path.read_dir().expect("/sys/class/tty/ doesn't exist on this system") {
                 let raw_path = path?.path().clone();
-                println("Checking {:?}", raw_path);
+                println!("Checking {:?}", raw_path);
                 let mut path = raw_path.clone();
 
                 path.push("device");
