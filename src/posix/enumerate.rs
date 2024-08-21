@@ -573,7 +573,7 @@ cfg_if! {
             }
             Ok(vec)
         }
-    } else if #[cfg(all(target_os = "linux", feature = "libudev"))] {
+    } else if #[cfg(all(target_os = "linux", not(target_env = "musl"), feature = "libudev"))] {
         /// Scans the system for serial ports and returns a list of them.
         /// The `SerialPortInfo` struct contains the name of the port
         /// which can be used for opening it.
@@ -620,6 +620,7 @@ cfg_if! {
             let mut s;
             for path in sys_path.read_dir().expect("/sys/class/tty/ doesn't exist on this system") {
                 let raw_path = path?.path().clone();
+                println("Checking {:?}", raw_path);
                 let mut path = raw_path.clone();
 
                 path.push("device");
