@@ -620,7 +620,6 @@ cfg_if! {
             let mut s;
             for path in sys_path.read_dir().expect("/sys/class/tty/ doesn't exist on this system") {
                 let raw_path = path?.path().clone();
-                println!("Checking {:?}", raw_path);
                 let mut path = raw_path.clone();
 
                 path.push("device");
@@ -644,6 +643,7 @@ cfg_if! {
                 // See https://github.com/serialport/serialport-rs/issues/66 for details.
                 if let Some(file_name) = raw_path.file_name() {
                     let device_file = device_path.join(file_name);
+                    println!("Checking {:?}", device_file);
                     if !device_file.exists() {
                         continue;
                     }
